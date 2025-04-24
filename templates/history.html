@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Research History - Deep Research AI{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Research History</h1>
+    
+    <div class="d-flex justify-content-between mb-4">
+        <a href="{{ url_for('index') }}" class="btn btn-primary">New Research</a>
+    </div>
+    
+    {% if researches %}
+        <div class="list-group">
+            {% for research in researches %}
+                <a href="{{ url_for('view_research', research_id=research.id) }}" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ research.query }}</h5>
+                        <small>{{ research.created_at.strftime('%Y-%m-%d %H:%M') }}</small>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info">
+            <p>No research history available. Start a new research query.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

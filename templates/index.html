@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Deep Research AI - Home{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card bg-dark shadow-sm">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Deep Research AI System</h1>
+                <p class="card-text text-center mb-4">
+                    A multi-agent system for comprehensive research and answer drafting. Enter your research query below.
+                </p>
+                
+                <form action="/research" method="POST" id="research-form">
+                    <div class="mb-3">
+                        <label for="query" class="form-label">Research Query</label>
+                        <textarea class="form-control" id="query" name="query" rows="3" placeholder="Enter your research question here..." required></textarea>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary" id="submit-btn">
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none me-2" role="status" aria-hidden="true"></span>
+                            Start Research
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card bg-dark mt-4">
+            <div class="card-body">
+                <h5 class="card-title">How it works</h5>
+                <div class="row">
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="px-3">
+                            <h2><i class="bi bi-search"></i></h2>
+                            <h6>Research Agent</h6>
+                            <p class="small text-muted">Gathers information from the web using Tavily API</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="px-3">
+                            <h2><i class="bi bi-pencil-square"></i></h2>
+                            <h6>Drafting Agent</h6>
+                            <p class="small text-muted">Synthesizes research into coherent, comprehensive answers</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-center mb-3">
+                        <div class="px-3">
+                            <h2><i class="bi bi-diagram-3"></i></h2>
+                            <h6>LangGraph Workflow</h6>
+                            <p class="small text-muted">Orchestrates the agents to produce high-quality results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.getElementById('research-form').addEventListener('submit', function() {
+    document.getElementById('spinner').classList.remove('d-none');
+    document.getElementById('submit-btn').setAttribute('disabled', 'disabled');
+    document.getElementById('submit-btn').innerText = 'Researching...';
+});
+</script>
+{% endblock %}
